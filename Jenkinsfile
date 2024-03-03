@@ -5,7 +5,8 @@ pipeline {
             }
       }
     triggers {
-        pollSCM '* * * * *'
+        // Poll every 5mins - if there're changes, runs pipeline
+        pollSCM '*/5 * * * *'
     }
     stages {
         stage('Build') {
@@ -21,9 +22,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
+                echo "doing test stuff.."
                 '''
             }
         }
